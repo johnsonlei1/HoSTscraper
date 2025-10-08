@@ -36,14 +36,41 @@ def scrape(url):
     return e.extract(r.text)
 
 # product_data = []
-with open("search_results_urls.txt",'r') as urllist, open('search_results_output.jsonl','w') as outfile:
+with open("search_results_urls.txt",'r') as urllist, open('search_results_output.jsonl','w') as outfile, open('urls.txt','a') as product_urls:
     for url in urllist.read().splitlines():
         data = scrape(url) 
         if data:
             for product in data['products']:
-                product['search_url'] = url
-                print("Saving Product: %s"%product['title'])
-                json.dump(product,outfile)
+                # Try primary fields
+                title = product.get('title')
+                link = product.get('url')
+                # Fallbacks: derive from image alt and ASIN
+                if not title:
+                    title = product.get('img_alt')
+                if not link:
+                    asin = product.get('asin')
+                    if asin:
+                        link = f'/dp/{asin}'
+                # If still missing both, skip
+                if not title or not link:
+                    continue
+                # Normalize relative URLs
+                if isinstance(link, str) and link.startswith('/'):
+                    link = 'https://www.amazon.com' + link
+                # Build minimal record with only requested fields
+                minimal = {
+                    'title': title,
+                    'url': link,
+                    'asin': product.get('asin'),
+                    'price': product.get('price')
+                }
+                print("Saving Product: %s"%title)
+                json.dump(minimal,outfile)
                 outfile.write("\n")
+                # Append normalized URL to urls.txt for product detail scraping
+                try:
+                    product_urls.write(link + "\n")
+                except Exception:
+                    pass
                 # sleep(5)
     

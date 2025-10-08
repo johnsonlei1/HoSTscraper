@@ -4,24 +4,32 @@ products:
     multiple: true
     type: Text
     children:
+        asin:
+            css: ''
+            xpath: null
+            type: Attribute
+            attribute: data-asin
         title:
-            css: 'h2 a.a-link-normal.a-text-normal'
+            css: 'a.a-link-normal.s-underline-text.s-underline-link-text.s-link-style span.a-size-base-plus, a.a-link-normal.s-underline-text.s-underline-link-text.s-link-style span.a-size-medium, a.a-link-normal.s-underline-text.s-underline-link-text.s-link-style span.a-text-normal, a.a-link-normal span.a-size-base-plus, a.a-link-normal span.a-size-medium, a.a-link-normal span.a-text-normal'
             xpath: null
             type: Text
         url:
-            css: 'h2 a.a-link-normal.a-text-normal'
+            css: 'a.a-link-normal.s-underline-text.s-underline-link-text.s-link-style, a.a-link-normal'
             xpath: null
             type: Link
+        img_alt:
+            css: 'img.s-image'
+            xpath: null
+            type: Attribute
+            attribute: alt
         rating:
-            css: 'div.a-row.a-size-small span:nth-of-type(1)'
+            css: 'span.a-icon-alt'
             xpath: null
-            type: Attribute
-            attribute: aria-label
+            type: Text
         reviews:
-            css: 'div.a-row.a-size-small span:nth-of-type(2)'
+            css: 'span[aria-label$="ratings"], span[aria-label$="rating"], span.a-size-base.s-underline-text'
             xpath: null
-            type: Attribute
-            attribute: aria-label
+            type: Text
         price:
             css: 'span.a-price:nth-of-type(1) span.a-offscreen'
             xpath: null

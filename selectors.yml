@@ -2,7 +2,7 @@ name:
     css: '#productTitle'
     type: Text
 price:
-    css: '#price_inside_buybox'
+    css: '#corePriceDisplay_desktop_feature_div span.a-offscreen, span.a-price.a-text-price span.a-offscreen, .a-price .a-offscreen, #price_inside_buybox'
     type: Text
 short_description:
     css: '#featurebullets_feature_div'
@@ -12,10 +12,10 @@ images:
     type: Attribute
     attribute: data-a-dynamic-image
 rating:
-    css: span.arp-rating-out-of-text
+    css: 'span[data-hook="rating-out-of-text"], i[data-hook="average-star-rating"] span.a-icon-alt, span.arp-rating-out-of-text, span.a-icon-alt'
     type: Text
 number_of_reviews:
-    css: 'a.a-link-normal h2'
+    css: '#acrCustomerReviewText, span[data-hook="total-review-count"]'
     type: Text
 variants:
     css: 'form.a-section li'
@@ -31,7 +31,7 @@ variants:
             type: Attribute
             attribute: data-defaultasin
 product_description:
-    css: '#productDescription'
+    css: '#productDescription, #featurebullets_feature_div, #feature-bullets'
     type: Text
 sales_rank:
     css: 'li#SalesRank'
